@@ -3,17 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>張芷榆 Selina Zhang | 個人作品集</title>
+    <title>張芷瑜 (Selina Zhang) | 軟韌體與硬體驗證工程師</title>
+    <!-- 引入 Google Fonts: Inter (英文/數字) 與 Noto Sans TC (中文) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* ====== 基礎設定 & 字體 (極簡專業感) ====== */
+        /* ====== 1. 色彩計畫 & 變數設定 (Color Palette & Variables) ====== */
         :root {
-            --primary-color: #1a1a1a;
-            --secondary-color: #555555;
-            --bg-color: #ffffff;
-            --accent-color: #2c3e50;
-            --border-color: #eaeaea;
+            --bg-off-white: #F8F9FA;
+            --white: #FFFFFF;
+            --tech-blue: #0033A0;      /* 科技藍 (類似美光藍) */
+            --tech-blue-light: #E6ECF5;
+            --dark-slate-gray: #2F4F4F; /* 深鐵灰 */
+            --text-main: #2C3E50;
+            --text-muted: #64748B;
+            --accent-amber: #F59E0B;   /* 琥珀色 (強調亮點) */
+            --accent-mint: #20C997;    /* 薄荷綠 (強調成績) */
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --radius-md: 8px;
+            --radius-lg: 12px;
         }
 
+        /* ====== 2. 全局重置與字體 (Typography & Reset) ====== */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -21,474 +36,683 @@
         }
 
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--primary-color);
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-off-white);
+            color: var(--text-main);
             line-height: 1.6;
-            letter-spacing: 0.03em;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 950px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 50px 20px;
+            padding: 60px 20px;
         }
 
-        h1, h2, h3 {
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        p {
-            color: var(--secondary-color);
-            margin-bottom: 15px;
-        }
-
-        section {
-            margin-bottom: 80px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 40px;
-        }
-
-        section:last-child {
-            border-bottom: none;
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            color: var(--dark-slate-gray);
         }
 
         .section-title {
-            font-size: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent-color);
+            font-size: 1.75rem;
             margin-bottom: 30px;
-            display: inline-block;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 5px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+            color: var(--tech-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* ====== 關於我 (About Me) ====== */
-        .about-me {
+        /* 隱藏捲軸但保持可滑動 (針對輪播區) */
+        ::-webkit-scrollbar { height: 6px; width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-off-white); }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+        /* ====== 3. 首頁：Hero Section ====== */
+        .hero {
             display: flex;
             align-items: center;
             gap: 40px;
-            margin-top: 20px;
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 60px;
         }
 
-        .avatar {
-            width: 160px;
-            height: 160px;
+        .hero-img {
+            flex-shrink: 0;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             object-fit: cover;
+            border: 4px solid var(--tech-blue-light);
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            color: var(--tech-blue);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .elevator-pitch {
+            font-size: 1.05rem;
+            border-left: 4px solid var(--tech-blue);
+            padding-left: 16px;
+            margin-bottom: 25px;
+            color: var(--dark-slate-gray);
+            font-weight: 500;
+        }
+
+        .contact-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--tech-blue);
+            color: var(--white);
+        }
+        .btn-primary:hover { background-color: #002277; }
+
+        .btn-outline {
+            background-color: transparent;
+            border-color: var(--tech-blue);
+            color: var(--tech-blue);
+        }
+        .btn-outline:hover {
+            background-color: var(--tech-blue-light);
+        }
+
+        /* ====== 4. 學業表現 (Academic Excellence) ====== */
+        .academic-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--border-color);
         }
 
-        .about-content h1 {
-            font-size: 2.2rem;
-            margin-bottom: 5px;
-            color: var(--primary-color);
-        }
-
-        .job-title {
-            font-size: 1.1rem;
-            color: var(--accent-color);
-            font-weight: 500;
-            margin-bottom: 15px;
-        }
-
-        .brand-statement {
-            font-size: 1.05rem;
-            font-style: italic;
-            border-left: 3px solid var(--primary-color);
-            padding-left: 15px;
-            color: var(--primary-color);
-        }
-
-        .edu-info {
-            font-size: 0.9rem;
-            color: var(--secondary-color);
-            margin-top: 10px;
-        }
-
-        /* ====== 精選作品 (Featured Projects) ====== */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-        }
-
-        .project-card {
-            background: #fff;
-            transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .image-container {
-            position: relative;
+        .chart-placeholder {
             width: 100%;
             height: 200px;
-            overflow: hidden;
-            border-radius: 4px;
-            background-color: #f5f5f5;
-        }
-
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        /* 滑鼠移過去的漸層效果 */
-        .image-container::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to top, rgba(44, 62, 80, 0.8) 0%, rgba(44, 62, 80, 0) 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .project-card:hover .image-container img {
-            transform: scale(1.05);
-        }
-
-        .project-card:hover .image-container::after {
-            opacity: 1;
-        }
-
-        .project-info {
-            padding: 20px 0;
-            flex-grow: 1;
+            background: #F1F5F9;
+            border: 2px dashed #CBD5E1;
+            border-radius: var(--radius-md);
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-top: 15px;
         }
 
-        .project-info h3 {
-            font-size: 1.15rem;
-            margin-bottom: 10px;
-            color: var(--primary-color);
-        }
-
-        .project-desc {
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-            flex-grow: 1;
-        }
-
-        .project-impact {
-            font-size: 0.9rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            background: #f9f9f9;
-            padding: 10px 12px;
-            border-left: 2px solid var(--accent-color);
-            margin-bottom: 0;
-        }
-
-        /* ====== 技能樹 (Skills) ====== */
-        .skills-container {
+        .tags-container {
             display: flex;
             flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .tag {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .tag-hw { background: var(--tech-blue-light); color: var(--tech-blue); }
+        .tag-sw { background: #E0F2FE; color: #0284C7; }
+        .tag-grade { background: #DCFCE7; color: #166534; margin-left: 5px;}
+
+        .honor-box {
+            background: #FFFBEB;
+            border-left: 4px solid var(--accent-amber);
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        /* ====== 5. 核心專案實作 (Projects Showcase) ====== */
+        /* 第一部分：大區塊 */
+        .project-hero {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border-top: 5px solid var(--tech-blue);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .highlight-text {
+            color: var(--accent-amber);
+            font-weight: 700;
+        }
+
+        .project-media-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .media-box {
+            background: #F8FAFC;
+            height: 220px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* 第二部分：雙卡片並排 */
+        .sub-projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .sub-project-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .micron-connection {
+            font-size: 0.85rem;
+            background: var(--tech-blue-light);
+            color: var(--tech-blue);
+            padding: 8px 12px;
+            border-radius: var(--radius-md);
+            margin: 15px 0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ====== 6. 課外活動 (Timeline Accordion) ====== */
+        .timeline-section {
+            margin-bottom: 60px;
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -30px;
+            top: 15px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--tech-blue);
+            border: 3px solid var(--white);
+            box-shadow: 0 0 0 2px var(--tech-blue-light);
+        }
+
+        .timeline-content {
+            background: var(--bg-off-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--tech-blue);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .timeline-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+        }
+
+        .timeline-thumb {
+            width: 50px;
+            height: 50px;
+            border-radius: 6px;
+            background: #CBD5E1;
+            object-fit: cover;
+        }
+
+        .timeline-title h4 { margin-bottom: 2px; font-size: 1.05rem; }
+        .timeline-title span { font-size: 0.85rem; color: var(--text-muted); font-family: 'Inter', sans-serif;}
+
+        .timeline-details {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 15px;
+            background: var(--white);
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+
+        .timeline-item.active .timeline-details {
+            max-height: 200px; /* 足夠顯示內容的高度 */
+            padding: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* ====== 7. 證照與技能 (Skills & Certs) ====== */
+        .skills-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
             gap: 30px;
         }
 
-        .skill-group {
-            flex: 1;
-            min-width: 250px;
+        .cert-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        .skill-group h3 {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            color: var(--accent-color);
-        }
-
-        .skill-list {
-            list-style: none;
-        }
-
-        .skill-list li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 10px;
-            color: var(--secondary-color);
-            font-size: 0.95rem;
-        }
-
-        .skill-list li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-
-        /* ====== 底部聯絡按鈕 ====== */
-        .contact-section {
-            text-align: center;
-            padding: 20px 0 40px 0;
-        }
-
-        .btn-contact {
-            background-color: var(--primary-color);
-            color: #ffffff;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            cursor: pointer;
-            border-radius: 30px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            font-family: inherit;
-        }
-
-        .btn-contact:hover {
-            background-color: var(--accent-color);
-            transform: scale(1.02);
-        }
-
-        /* ====== 彈跳視窗 (Modal) ====== */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(3px);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal.show {
-            display: block;
-            opacity: 1;
-        }
-
-        .modal-content {
-            background-color: #ffffff;
-            margin: 10% auto;
-            padding: 40px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 450px;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            text-align: left;
-            transform: translateY(-20px);
-            transition: transform 0.3s ease;
-        }
-
-        .modal.show .modal-content {
-            transform: translateY(0);
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close-btn:hover {
-            color: var(--primary-color);
-        }
-
-        .modal-info {
-            margin-top: 25px;
-            line-height: 1.8;
+        .cert-card {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
         
-        .modal-info a {
-            color: var(--accent-color);
-            text-decoration: none;
+        .cert-score {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-mint);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .icon-cloud {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-content: flex-start;
+        }
+
+        .tech-icon {
+            background: var(--dark-slate-gray);
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
             font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
-        .modal-info a:hover {
-            text-decoration: underline;
-        }
-
-        /* RWD 響應式設計 */
+        /* RWD 響應式 */
         @media (max-width: 768px) {
-            .about-me {
-                flex-direction: column;
-                text-align: center;
-                gap: 20px;
-            }
-            .brand-statement {
-                border-left: none;
-                border-top: 3px solid var(--primary-color);
-                padding-left: 0;
-                padding-top: 15px;
-            }
+            .hero { flex-direction: column; text-align: center; }
+            .contact-row { justify-content: center; }
+            .academic-grid, .project-media-grid, .sub-projects-grid, .skills-wrapper { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        
-        <!-- 1. 個人精簡介紹 (About Me) -->
-        <section id="about">
-            <div class="about-me">
-                <!-- 頭像建議放一張專業形象照 -->
-                <img src="https://via.placeholder.com/160/EEEEEE/999999?text=Profile+Photo" alt="Avatar" class="avatar">
-                <div class="about-content">
-                    <h1>張芷瑜 (Selina Zhang)</h1>
-                    <div class="job-title">求職意向：硬體驗證工程師 / 嵌入式軟韌體工程師</div>
-                    <p class="brand-statement">「結合資工軟體的靈活邏輯與電機硬體的底層精準，專注於硬體加速、資料驅動分析與跨領域系統驗證。」</p>
-                    <p class="edu-info">
-                        <strong>國立東華大學 資訊工程學系 輔系 電機工程學系</strong> (Sep 2022 - Jun 2026)<br>
-                        GPA: 3.6 / 4.0 | 英國牛津大學交換生 (獲 Top 5% 全額獎學金)
+<div class="container">
+
+    <!-- 1. 首頁：Hero Section -->
+    <header class="hero">
+        <!-- 建議替換為乾淨背景的半身專業照 -->
+        <img src="https://via.placeholder.com/180x180/E2E8F0/64748B?text=Professional+Photo" alt="Profile Photo" class="hero-img">
+        <div class="hero-content">
+            <h1>張芷瑜 (Selina Zhang)</h1>
+            <div class="hero-subtitle">國立東華大學 資訊工程學系 輔修 電機工程學系 (2022-2026)</div>
+            <p class="elevator-pitch">
+                「結合資工軟體的靈活邏輯與電機硬體的底層精準。具備 FPGA 軟硬體協同設計與 VLSI 電路驗證經驗，期望將跨領域的資料分析與問題解決能力，貢獻於美光 (Micron) HBM 品質與失效分析 (PFA/EFA) 團隊。」
+            </p>
+            <div class="contact-row">
+                <a href="mailto:s0715368@gmail.com" class="btn btn-primary">
+                    ✉️ s0715368@gmail.com
+                </a>
+                <a href="https://www.linkedin.com/in/zhi-yu-zhang-776a8025a" target="_blank" class="btn btn-outline">
+                    🔗 LinkedIn Profile
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. 學業表現與亮點 -->
+    <section id="academic">
+        <h2 class="section-title">📊 Academic Excellence</h2>
+        <div class="academic-grid">
+            <div class="card">
+                <h3>成績成長軌跡</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">展現持續學習與突破困難的抗壓性 (Overall GPA: 3.6/4.0)</p>
+                <!-- 請在此替換為你的折線圖圖片 -->
+                <div class="chart-placeholder">
+                    📈[成績折線圖圖片放置區]
+                </div>
+            </div>
+            <div class="card">
+                <h3>專業課程 Highlight</h3>
+                <div class="tags-container">
+                    <span class="tag tag-hw">半導體製程 (Semiconductor Process)</span>
+                    <span class="tag tag-hw">超大型積體電路實驗 (VLSI Lab)</span>
+                </div>
+                <div class="tags-container" style="margin-top: 10px;">
+                    <span class="tag tag-sw">演算法設計 <span class="tag-grade">Grade: A+</span></span>
+                    <span class="tag tag-sw">資料結構 (Data Structures)</span>
+                </div>
+                
+                <div class="honor-box">
+                    <h4 style="color: #B45309; margin-bottom: 5px;">🏆 國際榮譽亮點</h4>
+                    <p style="font-size: 0.95rem; color: #78350F;">
+                        獲 <strong>Top 5% 全額獎學金</strong>赴英國牛津大學交換 (Oxford University Exchange Program, 2023)，於全校激烈競爭中脫穎而出。
                     </p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- 2. 精選作品專區 (Featured Projects) -->
-        <section id="projects">
-            <h2 class="section-title">Featured Projects & Experience</h2>
-            <div class="projects-grid">
+    <!-- 3. 核心專案實作 -->
+    <section id="projects">
+        <h2 class="section-title">💻 Projects Showcase</h2>
+        
+        <!-- 第一部分：重點突擊 (FPGA) -->
+        <div class="project-hero">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                    <h3 style="font-size: 1.4rem; color: var(--tech-blue);">FPGA 輕量化人臉辨識系統 (MobileFaceNet)</h3>
+                    <p style="margin-top: 10px; font-weight: 500;">
+                        基於 PYNQ-Z1 的軟硬體協同設計，實現 30 FPS 即時人臉偵測，並將模型推論延遲降低 <span class="highlight-text">6.32%</span>。
+                    </p>
+                </div>
+            </div>
+
+            <div class="project-media-grid">
+                <div class="media-box">
+                    <span>🧠 [系統架構/心智圖 放置區]</span>
+                    <span style="font-size: 0.8rem; margin-top: 5px;">展示 PS/PL 分工、AXI 介面與 Vitis HLS 架構</span>
+                </div>
+                <div class="media-box">
+                    <span>▶️ [Demo GIF/影片 放置區]</span>
+                    <span style="font-size: 0.8rem; margin-top: 5px;">展示 30 FPS 人臉辨識實際運作畫面</span>
+                </div>
+            </div>
+
+            <div class="contact-row">
+                <button class="btn btn-primary">📄 專題簡報 (PDF)</button>
+                <button class="btn btn-outline">🖼️ 成果海報 (PDF)</button>
+                <button class="btn btn-outline">⌨️ GitHub Source</button>
+            </div>
+        </div>
+
+        <!-- 第二部分：VLSI & ML -->
+        <div class="sub-projects-grid">
+            <!-- 卡片一：VLSI -->
+            <div class="sub-project-card">
+                <h3>超大型積體電路 (VLSI) 實作</h3>
+                <div class="micron-connection">
+                    💡 關聯美光：具備底層硬體與電路知識，對接 HBM PFA/EFA 失效分析與根因釐清。
+                </div>
+                <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px;">
+                    使用 HSPICE 進行電路模擬，透過 Laker 完成 Layout 佈局，並熟練操作 Calibre 執行 DRC / LVS / PEX 佈局後驗證，確保電路符合設計規範。
+                </p>
+                <div class="chart-placeholder" style="height: 120px;">
+                    🔍[電路圖 / Layout 縮圖放置區]
+                </div>
+            </div>
+
+            <!-- 卡片二：AI Cup -->
+            <div class="sub-project-card">
+                <h3>機器學習 AI Cup 數據競賽</h3>
+                <div class="micron-connection">
+                    💡 關聯美光：掌握資料分析與異常處理能力，助力製程監控與品質改善專案 (CIP)。
+                </div>
+                <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px;">
+                    從零建立資料管道，利用 Python 進行資料前處理 (Data Preprocessing)，並建構 PyTorch 模型進行訓練與結果分析，實現 Data-driven 決策。
+                </p>
+                <div class="chart-placeholder" style="height: 120px;">
+                    📊 [資料處理流程圖 放置區]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 課外活動與軟實力 -->
+    <section id="experience">
+        <h2 class="section-title">🤝 Leadership & Soft Skills</h2>
+        <p style="margin-bottom: 25px; color: var(--text-muted);">* 美光高度重視跨部門溝通與團隊合作。點擊下方卡片可展開詳細實績：</p>
+        
+        <div class="timeline-section">
+            <div class="timeline">
                 
-                <!-- 作品 1：FPGA (最具含金量與相關性) -->
-                <div class="project-card">
-                    <div class="image-container">
-                        <img src="https://via.placeholder.com/400x250/E2E8F0/475569?text=FPGA+Face+Recognition" alt="FPGA Project">
-                    </div>
-                    <div class="project-info">
-                        <h3>FPGA 輕量化人臉辨識系統 (MobileFaceNet)</h3>
-                        <p class="project-desc">
-                            <strong>設計理念：</strong>透過軟硬體協同設計 (PS/PL Co-design)，解決終端設備模型推論延遲的問題。<br>
-                            <strong>個人角色：</strong>建立 PYNQ-Z1 (Zynq SoC) 開發環境，以 C/C++ 撰寫 AXI 介面驅動程式，並透過 Vitis HLS 進行硬體加速 (達成 Pipeline II=1)。整合 Vivado 並以 Python/OpenCV 實作 30 FPS 即時人臉偵測。
-                        </p>
-                        <p class="project-impact">量化成果：透過迭代式硬體最佳化，團隊成功將模型推論延遲 (Inference latency) 降低 6.32%。</p>
-                    </div>
-                </div>
-
-                <!-- 作品 2：VLSI 實作 (展現硬體驗證與分析能力，針對美光HBM QA/FA) -->
-                <div class="project-card">
-                    <div class="image-container">
-                        <img src="https://via.placeholder.com/400x250/E2E8F0/475569?text=VLSI+%26+Circuit+Verification" alt="VLSI Project">
-                    </div>
-                    <div class="project-info">
-                        <h3>VLSI 積體電路設計與硬體驗證</h3>
-                        <p class="project-desc">
-                            <strong>設計理念：</strong>深入底層晶片設計，熟悉半導體製程與電路特性分析 (Circuit Characterization)，為硬體異常分析與品質控管打好基礎。<br>
-                            <strong>個人角色：</strong>使用 HSPICE 進行直流 (DC) 與暫態 (Transient) 模擬，利用 Laker 繪製 Layout，並操作 Calibre 執行 DRC / LVS / PEX 佈局後驗證。
-                        </p>
-                        <p class="project-impact">學習成果：具備 Data-driven debugging 能力，能直接應對複雜電路與硬體失效分析 (FA) 任務。</p>
+                <!-- 項目 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content" onclick="toggleAccordion(this)">
+                        <div class="timeline-header">
+                            <img src="https://via.placeholder.com/50/E2E8F0/64748B?text=Vol" alt="thumb" class="timeline-thumb">
+                            <div class="timeline-title">
+                                <h4>國際接待義工 (NDHU)</h4>
+                                <span>Feb 2024 - Mar 2024</span>
+                            </div>
+                        </div>
+                        <div class="timeline-details">
+                            <p><strong>突顯能力：解決突發狀況與跨部門/語言溝通</strong><br>
+                            協助外籍賓客進行現場英文溝通與後勤協調，在緊湊的行程中展現高抗壓性與即時問題解決能力。</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 作品 3：跨國專案管理 (展現軟實力與外語能力) -->
-                <div class="project-card">
-                    <div class="image-container">
-                        <img src="https://via.placeholder.com/400x250/E2E8F0/475569?text=Cross-cultural+Leadership" alt="Leadership">
+                <!-- 項目 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content" onclick="toggleAccordion(this)">
+                        <div class="timeline-header">
+                            <img src="https://via.placeholder.com/50/E2E8F0/64748B?text=Amb" alt="thumb" class="timeline-thumb">
+                            <div class="timeline-title">
+                                <h4>資工系國際親善大使</h4>
+                                <span>Sep 2023 - Jan 2024</span>
+                            </div>
+                        </div>
+                        <div class="timeline-details">
+                            <p><strong>突顯能力：外語實戰力與機構形象推廣</strong><br>
+                            為國際代表團（包含美國大學訪客）進行全英文校園導覽，具備流利的跨文化溝通技巧，有效提升系所國際聲譽。</p>
+                        </div>
                     </div>
-                    <div class="project-info">
-                        <h3>國際科技會議與跨國交流專案</h3>
-                        <p class="project-desc">
-                            <strong>設計理念：</strong>科技業需要高度跨國協作，透過參與國際活動鍛鍊跨團隊溝通與抗壓性。<br>
-                            <strong>個人角色：</strong>擔任量子計算學生研討會行政團隊核心，主導會議規劃與視覺設計；並曾擔任花蓮有機論壇英文口譯，以及 NDHU 資工系國際親善大使。
-                        </p>
-                        <p class="project-impact">量化成果：獲 Top 5% 獎學金赴牛津大學交流；具備流利英文溝通與撰寫跨團隊技術文件能力 (TOEIC 855)。</p>
+                </div>
+
+                <!-- 項目 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content" onclick="toggleAccordion(this)">
+                        <div class="timeline-header">
+                            <img src="https://via.placeholder.com/50/E2E8F0/64748B?text=Int" alt="thumb" class="timeline-thumb">
+                            <div class="timeline-title">
+                                <h4>花蓮有機論壇 英文口譯</h4>
+                                <span>Oct 2023</span>
+                            </div>
+                        </div>
+                        <div class="timeline-details">
+                            <p><strong>突顯能力：高壓環境下的即時應變能力</strong><br>
+                            為國際與會者提供專業的現場即時英文口譯與引導，確保跨國知識交流的順暢進行。</p>
+                        </div>
                     </div>
                 </div>
 
-            </div>
-        </section>
-
-        <!-- 3. 技能樹 (Skills) -->
-        <section id="skills">
-            <h2 class="section-title">Skills & Expertise</h2>
-            <div class="skills-container">
-                <div class="skill-group">
-                    <h3>軟體與演算法 (Software & Algorithms)</h3>
-                    <ul class="skill-list">
-                        <li>C / C++ (Algorithm design, Hardware driver)</li>
-                        <li>Python (PyTorch, OpenCV, Automation scripting)</li>
-                        <li>Data Structures & Algorithm Design (Grade: A+)</li>
-                        <li>Linux Environment & Embedded Software</li>
-                    </ul>
+                <!-- 項目 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content" onclick="toggleAccordion(this)">
+                        <div class="timeline-header">
+                            <img src="https://via.placeholder.com/50/E2E8F0/64748B?text=Oxf" alt="thumb" class="timeline-thumb">
+                            <div class="timeline-title">
+                                <h4>英國牛津大學 交換生</h4>
+                                <span>Jul 2023 - Aug 2023</span>
+                            </div>
+                        </div>
+                        <div class="timeline-details">
+                            <p><strong>突顯能力：主動積極與全球化視野</strong><br>
+                            榮獲全校 Top 5% 獎學金，參與為期兩週的深度學術與文化交流，累積跨國界團隊合作經驗。</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="skill-group">
-                    <h3>硬體與驗證 (Hardware & Verification)</h3>
-                    <ul class="skill-list">
-                        <li>FPGA (Vivado, Vitis HLS, PYNQ, AXI interface)</li>
-                        <li>PS/PL Co-design (軟硬體協同設計)</li>
-                        <li>HSPICE (DC/Transient simulation)</li>
-                        <li>Laker (Layout), Calibre (DRC/LVS/PEX)</li>
-                    </ul>
+
+                <!-- 項目 5 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content" onclick="toggleAccordion(this)">
+                        <div class="timeline-header">
+                            <img src="https://via.placeholder.com/50/E2E8F0/64748B?text=QC" alt="thumb" class="timeline-thumb">
+                            <div class="timeline-title">
+                                <h4>量子計算學生研討會 行政團隊</h4>
+                                <span>Mar 2023 - Aug 2023</span>
+                            </div>
+                        </div>
+                        <div class="timeline-details">
+                            <p><strong>突顯能力：專案統籌與團隊協作</strong><br>
+                            主導會議規劃、會議記錄建立、視覺設計及宣傳素材開發，展現優秀的跨部門文書統籌與執行力。</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="skill-group">
-                    <h3>軟實力與語言 (Soft Skills & Languages)</h3>
-                    <ul class="skill-list">
-                        <li>Cross-team technical documentation (跨團隊技術文件撰寫)</li>
-                        <li>Data-driven debugging & Circuit characterization</li>
-                        <li>English (Professional) - TOEIC 855</li>
-                        <li>Problem-solving & Stress resistance</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
 
-        <!-- 4. 聯絡我按鈕區 -->
-        <div class="contact-section">
-            <button id="contactBtn" class="btn-contact">聯絡我 (Contact Me)</button>
-        </div>
-
-    </div>
-
-    <!-- 聯絡我 彈跳視窗 (Modal) -->
-    <div id="contactModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h2 style="margin-bottom: 5px; color: var(--primary-color);">Get In Touch</h2>
-            <p style="font-size: 0.95rem; color: var(--secondary-color); margin-bottom: 20px;">
-                非常期待能將我的分析與技術能力，貢獻於貴公司的工程團隊（尤其是美光 Micron 的 HBM 品質分析與硬體開發團隊）。歡迎隨時與我聯繫！
-            </p>
-            <div class="modal-info">
-                <p><strong>Email:</strong> <br><a href="mailto:s0715368@gmail.com">s0715368@gmail.com</a></p>
-                <p><strong>Phone:</strong> <br>0979-106-560</p>
-                <p><strong>Location:</strong> <br>Taichung, Taiwan</p>
-                <p><strong>LinkedIn:</strong> <br><a href="https://www.linkedin.com/in/zhi-yu-zhang-776a8025a" target="_blank">linkedin.com/in/zhi-yu-zhang</a></p>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- JavaScript 控制彈跳視窗 -->
-    <script>
-        const modal = document.getElementById("contactModal");
-        const btn = document.getElementById("contactBtn");
-        const span = document.getElementsByClassName("close-btn")[0];
+    <!-- 5. 證照與技能 -->
+    <section id="skills">
+        <h2 class="section-title">📜 Certifications & Tool Stack</h2>
+        <div class="skills-wrapper">
+            
+            <!-- 證照區 -->
+            <div class="cert-cards">
+                <div class="cert-card">
+                    <div class="cert-score">855</div>
+                    <div>
+                        <h4 style="margin-bottom: 2px;">TOEIC 專業級英文認證</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">具備閱讀原廠技術文件與跨國會議溝通能力</p>
+                    </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-score" style="color: var(--tech-blue); font-size: 1.2rem;">GEPT</div>
+                    <div>
+                        <h4 style="margin-bottom: 2px;">全民英檢 中高級</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">High-Intermediate Level</p>
+                    </div>
+                </div>
+                <div class="cert-card" style="border-left: 4px solid var(--tech-blue);">
+                    <div style="font-size: 1.5rem;">🤖</div>
+                    <div>
+                        <h4 style="margin-bottom: 2px;">AI 數據分析與工具應用</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">熟練運用 Claude 等生成式 AI 進行程式輔助與數據處理</p>
+                    </div>
+                </div>
+            </div>
 
-        // 點擊按鈕打開 Modal
-        btn.onclick = function() {
-            modal.classList.add("show");
+            <!-- 技能圖標牆 -->
+            <div>
+                <h3 style="margin-bottom: 15px; color: var(--text-muted); font-size: 1rem;">Core Technology Stack</h3>
+                <div class="icon-cloud">
+                    <span class="tech-icon">C / C++</span>
+                    <span class="tech-icon">Python</span>
+                    <span class="tech-icon">PyTorch</span>
+                    <span class="tech-icon">OpenCV</span>
+                    <span class="tech-icon">FPGA</span>
+                    <span class="tech-icon">Vivado</span>
+                    <span class="tech-icon">Vitis HLS</span>
+                    <span class="tech-icon">PYNQ</span>
+                    <span class="tech-icon">HSPICE</span>
+                    <span class="tech-icon">Laker</span>
+                    <span class="tech-icon">Calibre</span>
+                    <span class="tech-icon">Linux</span>
+                    <span class="tech-icon">AXI Interface</span>
+                    <span class="tech-icon">Data-driven Debugging</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+<!-- 控制 Timeline Accordion 的簡單 JS -->
+<script>
+    function toggleAccordion(element) {
+        // 獲取當前點擊的 timeline-item 容器
+        const parentItem = element.parentElement;
+        
+        // 切換 active class
+        if (parentItem.classList.contains('active')) {
+            parentItem.classList.remove('active');
+        } else {
+            // 如果希望一次只展開一個，可解除下方註解：
+            // document.querySelectorAll('.timeline-item').forEach(item => item.classList.remove('active'));
+            parentItem.classList.add('active');
         }
+    }
+</script>
 
-        // 點擊 (x) 關閉 Modal
-        span.onclick = function() {
-            modal.classList.remove("show");
-        }
-
-        // 點擊 Modal 外部區域關閉 Modal
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.classList.remove("show");
-            }
-        }
-    </script>
 </body>
 </html>
