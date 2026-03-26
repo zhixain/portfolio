@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zhi-Yu Zhang | FPGA & Firmware Engineer</title>
-    <!-- 引入字體 -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-    
+
     <style>
-        /* ================= 變數與全域設定 (GitHub Dark 風格) ================= */
+        /* ================= 變數與全域設定 ================= */
         :root {
             --bg-dark: #0D1117;
             --bg-card: #161B22;
@@ -23,7 +22,11 @@
             --transition: all 0.3s ease;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             font-family: var(--font-sans);
@@ -33,385 +36,809 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4, h5, h6, .mono { font-family: var(--font-mono); }
-        a { color: var(--accent-blue); text-decoration: none; transition: var(--transition); }
-        a:hover { color: var(--accent-cyan); }
+            /* 雙語切換邏輯 */
+            body.lang-en .zh {
+                display: none !important;
+            }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-        .section-divider { height: 1px; background: var(--border-color); margin: 60px 0; width: 100%; }
+            body:not(.lang-en) .en {
+                display: none !important;
+            }
+
+        h1, h2, h3, h4, h5, h6, .mono {
+            font-family: var(--font-mono);
+        }
+
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+            a:hover {
+                color: var(--accent-cyan);
+            }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 60px 0;
+            width: 100%;
+        }
 
         /* ================= 導覽列 ================= */
         nav {
             position: fixed;
-            top: 0; width: 100%;
+            top: 0;
+            width: 100%;
             background: rgba(13, 17, 23, 0.9);
             backdrop-filter: blur(8px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
             padding: 15px 0;
         }
-        .nav-links {
-            display: flex; justify-content: center; gap: 30px;
-            font-family: var(--font-mono); font-size: 0.9rem;
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        /* ================= 首頁 / 關於我 ================= */
-        .hero { padding: 120px 20px 60px; text-align: center; max-width: 800px; margin: 0 auto; }
-        .hero h1 { font-size: 2.8rem; color: var(--text-main); margin-bottom: 10px; }
-        .hero-subtitle { font-size: 1.2rem; color: var(--accent-cyan); font-family: var(--font-mono); margin-bottom: 25px; }
-        .hero-desc { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 30px; text-align: justify; text-align-last: center; }
-        
-        .resume-btn {
-            display: inline-block; font-family: var(--font-mono); padding: 12px 30px;
-            border: 1px solid var(--border-color); color: var(--text-main);
-            background: var(--bg-card); border-radius: 6px; font-size: 0.95rem; cursor: pointer;
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
         }
-        .resume-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+            .lang-btn:hover {
+                border-color: var(--accent-cyan);
+                color: var(--accent-cyan);
+            }
+
+        /* ================= 標題與按鈕 ================= */
+        .hero {
+            padding: 120px 20px 60px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+            .hero h1 {
+                font-size: 2.8rem;
+                color: var(--text-main);
+                margin-bottom: 10px;
+            }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--accent-cyan);
+            font-family: var(--font-mono);
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+            text-align: justify;
+            text-align-last: center;
+        }
+
+        .resume-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: var(--font-mono);
+            padding: 12px 30px;
+            margin-top: 15px;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            background: var(--bg-card);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+            .resume-btn:hover {
+                border-color: var(--accent-blue);
+                color: var(--accent-blue);
+                transform: translateY(-2px);
+            }
+
+            .resume-btn.primary {
+                border-color: var(--accent-cyan);
+                color: var(--accent-cyan);
+            }
+
+                .resume-btn.primary:hover {
+                    background: rgba(0, 245, 212, 0.1);
+                }
 
         /* ================= 專案展示：區塊共用 ================= */
-        .proj-section { padding: 40px 0; }
-        .block-title { font-size: 1.5rem; color: var(--accent-blue); margin-bottom: 25px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px; }
-        .two-col { display: flex; gap: 40px; align-items: center; }
-        .col-50 { flex: 1; min-width: 0; } /* 防止 flex 爆框 */
-        
+        .proj-section {
+            padding: 40px 0;
+        }
+
+        .block-title {
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+            margin-bottom: 25px;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .two-col {
+            display: flex;
+            gap: 40px;
+            align-items: stretch;
+        }
+
+        .col-50 {
+            flex: 1;
+            min-width: 0;
+        }
+
         .img-box {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: 8px; padding: 10px; position: relative;
-        }
-        .img-caption { text-align: center; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-top: 10px; }
-
-        /* ====== 圖片點擊放大 (Lightbox) ====== */
-        .zoomable { cursor: zoom-in; width: 100%; border-radius: 4px; transition: transform 0.3s; }
-        .zoomable:hover { transform: scale(1.02); box-shadow: 0 0 15px rgba(88, 166, 255, 0.2); }
-        .zoom-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(13, 17, 23, 0.95); z-index: 9999; justify-content: center; align-items: center; cursor: zoom-out;
-        }
-        .zoom-overlay.active { display: flex; }
-        .zoom-overlay img { max-width: 90vw; max-height: 90vh; border-radius: 8px; box-shadow: 0 0 30px rgba(0,0,0,0.8); }
-
-        /* ================= 區塊 1 & 2：標題與概述 ================= */
-        .project-hero {
-            text-align: center; padding: 60px 20px; background: var(--bg-card);
-            border: 1px solid var(--border-color); border-radius: 12px; position: relative; overflow: hidden;
-        }
-        .project-hero::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(var(--border-light) 1px, transparent 1px), linear-gradient(90deg, var(--border-light) 1px, transparent 1px);
-            background-size: 30px 30px; opacity: 0.5; z-index: 0;
-        }
-        .project-hero-content { position: relative; z-index: 1; }
-        .typewriter-title {
-            font-size: 2rem; color: var(--text-main); margin-bottom: 15px; display: inline-block;
-            border-right: 3px solid var(--accent-cyan); animation: typing 2.5s steps(40, end), blink 0.75s step-end infinite;
-            overflow: hidden; white-space: nowrap;
-        }
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink { 50% { border-color: transparent } }
-        
-        .proj-meta-line { color: var(--text-muted); font-family: var(--font-mono); font-size: 0.9rem; margin: 10px 0; }
-        .tech-tags { margin-top: 20px; color: var(--accent-cyan); font-family: var(--font-mono); font-size: 0.85rem; word-spacing: 5px; }
-
-        .overview-text { text-align: center; max-width: 800px; margin: 0 auto 40px; font-size: 1.05rem; }
-        .overview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .icon-card { background: var(--bg-card); border: 1px solid var(--border-color); padding: 20px; border-radius: 8px; text-align: center; }
-        .icon-card .icon { font-size: 2rem; margin-bottom: 10px; }
-        .icon-card h4 { margin-bottom: 8px; font-size: 1rem; }
-        .icon-card p { color: var(--text-muted); font-size: 0.85rem; }
-
-        /* ================= 區塊 4：開發流程 ================= */
-        .pipeline-container { display: flex; align-items: flex-start; justify-content: space-between; overflow-x: auto; padding-bottom: 10px; }
-        .pipe-step { background: var(--bg-card); border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; min-width: 160px; font-family: var(--font-mono); font-size: 0.85rem; }
-        .pipe-step h4 { color: var(--accent-blue); margin-bottom: 8px; font-size: 0.95rem; }
-        .pipe-step ul { padding-left: 15px; color: var(--text-muted); }
-        .pipe-arrow { display: flex; align-items: center; justify-content: center; color: var(--border-color); font-size: 1.5rem; padding: 20px 10px 0; }
-
-        /* ================= 區塊 5：Mermaid 流程圖容器 ================= */
-        .mermaid-wrapper {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 20px;
-            overflow-x: auto; /* 允許左右滑動擴展範圍 */
-            text-align: center;
+            padding: 10px;
+            position: relative;
+            height: 100%;
         }
 
-        /* ================= 其他區塊 (圖表/代碼) ================= */
-        .table-responsive { overflow-x: auto; margin-bottom: 30px; }
-        .data-table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 0.9rem; background: var(--bg-card); }
-        .data-table th, .data-table td { padding: 12px; border: 1px solid var(--border-color); text-align: left; }
-        .data-table th { color: var(--text-muted); font-weight: 500; }
-        .data-table tr.selected { background: rgba(0, 245, 212, 0.05); color: var(--accent-cyan); }
-        
-        .terminal-card { background: #0d1117; border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-main); }
-        .terminal-header { color: var(--text-muted); margin-bottom: 15px; border-bottom: 1px dashed var(--border-color); padding-bottom: 5px;}
-        .chart-row { display: flex; align-items: center; margin-bottom: 12px; }
-        .chart-label { width: 90px; color: var(--text-muted); }
-        .chart-bar-bg { flex: 1; background: var(--bg-card); height: 16px; border-radius: 2px; margin: 0 15px; overflow: hidden; }
-        .chart-bar-fill { height: 100%; background: var(--border-color); }
-        .chart-bar-fill.selected { background: var(--accent-cyan); }
-        
-        .compare-grid, .highlight-grid { display: grid; gap: 20px; }
-        .compare-grid { grid-template-columns: 1fr 1fr; }
-        .highlight-grid { grid-template-columns: repeat(3, 1fr); }
-        .comp-card { background: var(--bg-card); border: 1px solid var(--border-color); padding: 25px; border-radius: 8px; }
-        .comp-card.success { border-top: 3px solid var(--accent-cyan); }
-        .comp-card.fail { border-top: 3px solid #F85149; }
-        .comp-card h4 { margin-bottom: 15px; font-size: 1.1rem; }
-        .comp-card ul { padding-left: 20px; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;}
-        .trade-off { font-size: 0.85rem; background: #0d1117; padding: 10px; border-left: 3px solid var(--text-muted); }
-        
-        .code-block { font-family: var(--font-mono); background: #0d1117; padding: 15px; border-radius: 6px; border: 1px solid var(--border-color); color: var(--accent-cyan); font-size: 0.9rem; }
+        .img-caption {
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        /* 專案標題區 */
+        .project-hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .project-hero::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: linear-gradient(var(--border-light) 1px, transparent 1px), linear-gradient(90deg, var(--border-light) 1px, transparent 1px);
+                background-size: 30px 30px;
+                opacity: 0.5;
+                z-index: 0;
+            }
+
+        .project-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .typewriter-title {
+            font-size: 1.8rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            display: inline-block;
+            border-right: 3px solid var(--accent-cyan);
+            animation: typing 2.5s steps(40, end), blink 0.75s step-end infinite;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent
+            }
+        }
+
+        .proj-meta-line {
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            margin: 10px 0;
+        }
+
+        .tech-tags {
+            margin-top: 20px;
+            color: var(--accent-cyan);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            word-spacing: 5px;
+        }
+
+        /* 卡片與圖表 */
+        .terminal-card {
+            background: #0d1117;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--text-main);
+            height: 100%;
+        }
+
+        .terminal-header {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        /* 視覺優化長條圖 */
+        .chart-container {
+            position: relative;
+            padding: 20px 0;
+            border-left: 1px solid var(--border-color);
+            margin-left: 90px;
+        }
+
+        .chart-axis-label {
+            position: absolute;
+            bottom: 0;
+            left: -10px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .chart-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            position: relative;
+            left: -90px;
+            width: calc(100% + 90px);
+        }
+
+        .chart-label {
+            width: 80px;
+            color: var(--text-muted);
+            text-align: right;
+            padding-right: 15px;
+        }
+
+        .chart-bar-bg {
+            flex: 1;
+            background: var(--bg-card);
+            height: 20px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .chart-bar-fill {
+            height: 100%;
+            background: var(--border-color);
+            border-radius: 4px;
+            transition: width 1s ease-out;
+        }
+
+            .chart-bar-fill.selected {
+                background: var(--accent-cyan);
+                box-shadow: 0 0 10px rgba(0,245,212,0.3);
+            }
+
+        .chart-value {
+            width: 60px;
+            color: var(--text-main);
+            padding-left: 15px;
+        }
+
+        /* 浮動標籤 */
+        .latency-badge {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 245, 212, 0.15);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            z-index: 10;
+        }
+
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .comp-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+            .comp-card h4 {
+                margin-bottom: 15px;
+                font-size: 1.1rem;
+            }
+
+            .comp-card ul {
+                padding-left: 20px;
+                color: var(--text-muted);
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+            }
+
+            .comp-card li {
+                margin-bottom: 8px;
+            }
+
+        .code-block {
+            font-family: var(--font-mono);
+            background: #0d1117;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            height: 100%;
+        }
+
+        /* ================= 系統流程圖 Modal ================= */
+        .flowchart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(13, 17, 23, 0.98);
+            z-index: 9999;
+            flex-direction: column;
+        }
+
+            .flowchart-modal.active {
+                display: flex;
+            }
+
+        .modal-header {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-card);
+        }
+
+        .modal-title {
+            color: var(--accent-cyan);
+            font-family: var(--font-mono);
+            font-size: 1.2rem;
+        }
+
+        .close-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+            .close-btn:hover {
+                border-color: #F85149;
+                color: #F85149;
+            }
 
         @media (max-width: 768px) {
-            .two-col { flex-direction: column; gap: 20px; }
-            .overview-grid, .compare-grid, .highlight-grid { grid-template-columns: 1fr; }
-            .pipeline-container { flex-direction: column; align-items: stretch; }
-            .pipe-arrow { transform: rotate(90deg); padding: 10px 0; }
-            .typewriter-title { font-size: 1.5rem; white-space: normal; animation: none; border: none; }
+            .two-col {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .compare-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .typewriter-title {
+                font-size: 1.3rem;
+                white-space: normal;
+                animation: none;
+                border: none;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .chart-row {
+                left: -70px;
+                width: calc(100% + 70px);
+            }
+
+            .chart-label {
+                width: 60px;
+                font-size: 0.75rem;
+            }
+
+            .latency-badge {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                display: inline-block;
+                margin-top: 10px;
+            }
         }
     </style>
-
-    <!-- 載入 Mermaid.js 以繪製互動式流程圖 -->
-    <script type="module">
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({
-            startOnLoad: true,
-            theme: 'dark',
-            themeVariables: {
-                primaryColor: '#161B22',
-                primaryTextColor: '#E6EDF3',
-                primaryBorderColor: '#30363D',
-                lineColor: '#58A6FF',
-                fontFamily: 'Noto Sans TC, sans-serif'
-            }
-        });
-    </script>
 </head>
 <body>
 
-    <!-- 全螢幕圖片放大遮罩 -->
-    <div id="zoomOverlay" class="zoom-overlay" onclick="closeZoom()">
-        <img id="zoomImg" src="" alt="Zoomed Image">
+    <div id="flowchartModal" class="flowchart-modal">
+        <div class="modal-header" style="position: sticky; top: 0; z-index: 10;">
+            <div class="modal-title">
+                <span class="zh">系統控制流程與狀態機</span>
+                <span class="en">System Control Flowchart</span>
+            </div>
+            <button class="close-btn" onclick="closeFlowchart()">✕ Close</button>
+        </div>
+        <div style="flex: 1; padding: 0; background: #fff; display: flex; justify-content: center; align-items: center; overflow: hidden;">
+            <img src="flow.png" alt="System Flowchart" style="width: 100%; height: 100%; object-fit: contain; display: block;">
+        </div>
     </div>
 
-    <!-- 導覽列 -->
     <nav>
-        <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#project">Project</a>
-            <a href="#contact">Contact</a>
+        <div class="nav-inner">
+            <div class="nav-links">
+                <a href="#about"><span class="zh">關於我</span><span class="en">About</span></a>
+                <a href="#project"><span class="zh">專題作品</span><span class="en">Project</span></a>
+                <a href="#contact"><span class="zh">聯絡我</span><span class="en">Contact</span></a>
+            </div>
+            <button class="lang-btn" onclick="toggleLanguage()">🌐 EN / 中文</button>
         </div>
     </nav>
 
     <div class="container">
-        <!-- 首頁 / 關於我 -->
         <section id="about" class="hero">
             <h1>Zhi-Yu Zhang (Selina)</h1>
-            <div class="hero-subtitle">FPGA Systems Developer · Semiconductor Enthusiast</div>
+            <div class="hero-subtitle">
+                <span class="zh">
+                    國立東華大學 資訊工程學系 輔系電機工程學系<br>
+                    <span style="font-size: 0.9em; color: var(--text-muted);">預計 2026 年 6 月畢業</span>
+                </span>
+                <span class="en">
+                    National Dong Hwa University | B.S. in Computer Science, Minor in Electrical Engineering<br>
+                    <span style="font-size: 0.9em; color: var(--text-muted);">Class of 2026</span>
+                </span>
+            </div>
             <p class="hero-desc">
-                B.S. Computer Science & Information Engineering<br>
-                National Dong Hwa University | Graduating Jun. 2026<br><br>
-                My academic background bridges software algorithms and hardware implementation. I am passionate about applying cross-disciplinary knowledge to real-world semiconductor challenges, particularly in hardware-software co-design and embedded systems.
+                <span class="zh">專注於軟硬體協同設計 (HW/SW Co-design) 與 FPGA 開發，結合資工的演算法思維與電機的硬體底層知識，致力於邊緣運算與嵌入式系統的效能優化與實作。</span>
+                <span class="en">Specializing in HW/SW Co-design and FPGA development. Combining algorithmic thinking from Computer Science with low-level hardware knowledge from Electrical Engineering, dedicated to the performance optimization and implementation of edge computing and embedded systems.</span>
             </p>
-            <a href="resume.pdf" target="_blank" class="resume-btn">📄 Download Resume (PDF)</a>
+            <a href="resume.pdf" target="_blank" class="resume-btn">
+                <span class="zh">📄 下載完整履歷 (PDF)</span>
+                <span class="en">📄 Download Resume (PDF)</span>
+            </a>
         </section>
 
         <section id="project">
-            <!-- 區塊 1：專案標題 -->
             <div class="project-hero">
                 <div class="project-hero-content">
-                    <h2 class="typewriter-title">FPGA-Based Lightweight CNN<br>Face Recognition System</h2>
+                    <h2 class="typewriter-title">
+                        <span class="zh">基於卷積神經網路之人臉辨識的 FPGA 硬體實現</span>
+                        <span class="en">FPGA-Based Lightweight CNN Face Recognition System</span>
+                    </h2>
                     <div class="proj-meta-line">─────────────────────────────</div>
-                    <div class="proj-meta-line">Platform: PYNQ-Z1 (AMD-Xilinx Zynq SoC)</div>
-                    <div class="proj-meta-line">Role: PS/PL Architecture & Embedded Software Developer</div>
-                    <div class="proj-meta-line">Duration: Sep. 2024 – May 2025  |  Team Size: 4</div>
+                    <div class="proj-meta-line">
+                        <span class="zh">開發平台：PYNQ-Z1 (AMD-Xilinx Zynq SoC)</span>
+                        <span class="en">Platform: PYNQ-Z1 (AMD-Xilinx Zynq SoC)</span>
+                    </div>
+                    <div class="proj-meta-line">
+                        <span class="zh">負責職務：PS/PL 系統架構設計與嵌入式軟體開發</span>
+                        <span class="en">Role: PS/PL Architecture & Embedded Software Developer</span>
+                    </div>
+                    <div class="proj-meta-line">
+                        <span class="zh">指導教授：紀新洲 教授 | 團隊人數：4 人</span>
+                        <span class="en">Advisor: Prof. Hsin-Chou Chi | Team Size: 4</span>
+                    </div>
                     <div class="proj-meta-line">─────────────────────────────</div>
-                    <div class="tech-tags">FPGA · C/C++ · Python · Vitis HLS · OpenCV · AXI · Linux</div>
+                    <div class="tech-tags">Edge AI · FPGA (PYNQ-Z1) · Computer Vision · Vitis HLS · HW/SW Co-design</div>
                 </div>
             </div>
 
             <div class="section-divider"></div>
 
-            <!-- 區塊 2：概述 -->
             <div class="proj-section">
-                <p class="overview-text">
-                    This project implements a standalone face recognition system on the PYNQ-Z1 embedded platform, combining MobileFaceNet CNN inference with FPGA hardware acceleration. The system operates entirely offline without cloud dependency, covering face registration, feature extraction, and identity verification via cosine similarity.
-                </p>
-                <div class="overview-grid">
-                    <div class="icon-card"><div class="icon">🔧</div><h4>PS/PL Co-design</h4><p>ARM + FPGA collaborative architecture</p></div>
-                    <div class="icon-card"><div class="icon">⚡</div><h4>Hardware Accelerated</h4><p>CNN inference via HLS-optimized IP cores</p></div>
-                    <div class="icon-card"><div class="icon">🔒</div><h4>Offline & Secure</h4><p>No cloud dependency, standalone operation</p></div>
+                <div class="terminal-card" style="margin-bottom: 30px;">
+                    <strong style="color: var(--accent-cyan); font-size: 1.1rem;">
+                        <span class="zh">🚀 簡介 (Elevator Pitch)</span>
+                        <span class="en">🚀 Elevator Pitch</span>
+                    </strong><br><br>
+                    <span class="zh"><b>打造一套無需網路、保護隱私，且能在低成本硬體上即時運作的 AI 人臉辨識系統。</b><br>我們結合深度學習與 FPGA 軟硬體整合技術，讓門禁可直接於本地端運算。</span>
+                    <span class="en"><b>Building an AI facial recognition system that requires no network, protects privacy, and operates in real-time on low-cost hardware.</b><br>By integrating deep learning with FPGA HW/SW co-design, we enable access control to be processed entirely on the local edge device.</span>
                 </div>
-            </div>
 
-            <!-- 區塊 3：系統架構圖 (嵌入 Fig 4) -->
-            <div class="proj-section two-col">
-                <div class="col-50 code-block">
-                    <span style="color:var(--text-main)">System Architecture</span><br><br>
-                    The system divides responsibilities between:<br><br>
-                    <span style="color:var(--accent-blue)">• PS (ARM Cortex-A9)</span><br>
-                    &nbsp;&nbsp;- Camera capture & preprocessing<br>
-                    &nbsp;&nbsp;- Overlay loading & system control<br>
-                    &nbsp;&nbsp;- Feature vector storage & comparison<br><br>
-                    <span style="color:var(--accent-cyan)">• PL (FPGA Fabric)</span><br>
-                    &nbsp;&nbsp;- Conv/BN/PReLU/Linear HLS IP cores<br>
-                    &nbsp;&nbsp;- AXI4-Lite: control registers<br>
-                    &nbsp;&nbsp;- AXI4-Stream: data pipeline<br>
-                    &nbsp;&nbsp;- AXI DMA: bulk data transfer<br><br>
-                    PS and PL communicate via AXI Interconnect, with DMA reducing CPU overhead during large-scale feature map transfers.
-                </div>
-                <div class="col-50">
-                    <div class="img-box">
-                        <!-- Fig 4 Vivado Block Design，加入點擊放大功能 -->
-                        <img src="assets/images/fig4-vivado.png" alt="Vivado Block Design" class="zoomable" onclick="openZoom(this.src)" title="點擊放大">
-                        <div class="img-caption">Vivado Block Design — ZYNQ PS + AXI DMA + HLS IP Cores<br><span style="color:var(--accent-cyan);">(Click to enlarge / 點擊放大)</span></div>
+                <div class="two-col">
+                    <div class="col-50 code-block">
+                        <span style="color:var(--accent-blue); font-size: 1.2rem; font-weight: bold;">
+                            <span class="zh">開發背景</span>
+                            <span class="en">Background</span>
+                        </span><br><br>
+                        <span class="zh">
+                            <b>隱私與網路限制：</b>高度依賴雲端運算，存在資料外洩風險，且無網路即停擺。<br><br>
+                            <b>邊緣設備算力不足：</b>若將 AI 模型直接放到一般平價的嵌入式設備上跑，往往會遭遇嚴重的畫面卡頓與高延遲。
+                        </span>
+                        <span class="en">
+                            <b>Privacy & Network Limits:</b> High dependence on cloud computing poses data leak risks and fails without a network.<br><br>
+                            <b>Insufficient Edge Compute:</b> Deploying AI models directly on standard budget embedded devices often leads to severe frame drops and high latency.
+                        </span>
+                    </div>
+                    <div class="col-50 code-block" style="border-color: var(--accent-cyan);">
+                        <span style="color:var(--accent-cyan); font-size: 1.2rem; font-weight: bold;">
+                            <span class="zh">我們的解決方案</span>
+                            <span class="en">Our Solution</span>
+                        </span><br><br>
+                        <span class="zh">
+                            我們以 PYNQ-Z1 (FPGA) 作為邊緣加速平台，透過軟硬體協同設計 (HW/SW Co-design) 突破設備算力瓶頸：<br>
+                            <b>• AI 模型硬體化：</b>將複雜的 CNN 神經網路直接轉換為「實體硬體電路」執行，取代傳統軟體運算，大幅加速推論過程。<br>
+                            <b>• ARM 與 PL 高效分工：</b>結合 ARM 處理器與可程式邏輯 (PL)，精準分配控制邏輯與平行運算任務，打造完全脫離雲端的本地端架構。<br>
+                            <b>• 兼顧隱私與即時效能：</b>不僅實現資料完全在本地端 (Local) 處理以保障隱私，更在低成本硬體上成功實現 30 FPS 的即時辨識速度。
+                        </span>
+                        <span class="en">
+                            We use PYNQ-Z1 (FPGA) as an edge acceleration platform, breaking compute bottlenecks via HW/SW co-design:<br>
+                            <b>• Hardware-accelerated AI:</b> Converting complex CNNs directly into "physical hardware circuits" to replace traditional software computation, drastically speeding up inference.<br>
+                            <b>• Efficient ARM & PL Division:</b> Combining ARM with Programmable Logic (PL) to accurately distribute control logic and parallel computing tasks, creating a fully cloud-independent local architecture.<br>
+                            <b>• Privacy & Real-time Performance:</b> Ensuring data is processed entirely locally for privacy, while successfully achieving 30 FPS real-time recognition on low-cost hardware.
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <!-- 區塊 4：開發流程 -->
             <div class="proj-section">
-                <h3 class="block-title">Development Pipeline</h3>
-                <div class="pipeline-container">
-                    <div class="pipe-step"><h4>[1] C/C++ Algorithm</h4><ul><li>MobileFaceNet<br>Kernels</li></ul></div>
-                    <div class="pipe-arrow">→</div>
-                    <div class="pipe-step" style="border-color: var(--accent-cyan);">
-                        <h4>[2] Vitis HLS Synthesis</h4><ul><li style="color:var(--accent-cyan)">Loop Pipeline</li><li style="color:var(--accent-cyan)">Array Partition</li><li>II=1 Target</li></ul>
-                    </div>
-                    <div class="pipe-arrow">→</div>
-                    <div class="pipe-step"><h4>[3] RTL Export</h4><ul><li>IP Generation</li></ul></div>
-                    <div class="pipe-arrow">→</div>
-                    <div class="pipe-step"><h4>[4] Vivado Integration</h4><ul><li>Block Design</li><li>AXI Interconnect</li><li>DMA Config</li></ul></div>
-                    <div class="pipe-arrow">→</div>
-                    <div class="pipe-step"><h4>[5] PS Software Control</h4><ul><li>Python API</li><li>OpenCV Pipeline</li><li>Cosine Similarity</li></ul></div>
-                </div>
-            </div>
+                <h3 class="block-title">
+                    <span class="zh">技術挑戰與效能優化</span>
+                    <span class="en">Technical Challenges & Optimization</span>
+                </h3>
 
-            <!-- 區塊 5：辨識流程圖 (純程式碼互動式繪製 Fig 5) -->
-            <div class="proj-section">
-                <h3 class="block-title">Recognition Workflow (Registration & Identification)</h3>
-                <p style="color:var(--text-muted); margin-bottom: 20px; font-size: 0.95rem;">
-                    The system operates in a main loop, processing camera input and handling button interrupts for registration (Buttons 0, 1) and identification (Button 2). <span style="color:var(--accent-blue);">Scroll horizontally to view the full interactive flowchart.</span>
-                </p>
-                
-                <div class="mermaid-wrapper">
-                    <pre class="mermaid">
-                    graph TD
-                        Start([開始]) --> Init[載入 Overlay base.bit <br> 初始化 detector 開始攝影]
-                        
-                        Init --> Capture[抓取辨識的照片]
-                        Capture --> CheckCap{是否成功抓取?}
-                        
-                        CheckCap -- 否 --> Btn3((按鈕 3))
-                        Btn3 --> Release[釋放資源]
-                        Release --> End([結束程式])
-                        
-                        CheckCap -- 是 --> Gray[轉灰階並偵測人臉]
-                        Gray --> ReadBtn{讀取硬體按鈕}
-                        
-                        ReadBtn -- 按鈕 0 --> DetectFace{是否偵測到人臉?}
-                        DetectFace -- 否 --> BackLoop[返回主循環]
-                        DetectFace -- 是 --> TempPhoto[暫存照片]
-                        TempPhoto --> BackLoop
-                        
-                        ReadBtn -- 按鈕 1 <br> (註冊流程) --> CheckTemp1{是否暫存照片?}
-                        CheckTemp1 -- 否 --> BackLoop
-                        CheckTemp1 -- 是 --> InputName[輸入使用者名稱]
-                        InputName --> SavePhoto[儲存照片]
-                        SavePhoto --> LoadBit1[載入 design_1.bit]
-                        LoadBit1 --> ExtVec1[FPGA 提取人臉特徵向量]
-                        ExtVec1 --> SaveVec[儲存人臉特徵向量至資料庫]
-                        SaveVec --> BackLoop
-                        
-                        ReadBtn -- 按鈕 2 <br> (辨識流程) --> CheckTemp2{是否暫存照片?}
-                        CheckTemp2 -- 否 --> BackLoop
-                        CheckTemp2 -- 是 --> LoadBit2[載入 design_1.bit]
-                        LoadBit2 --> ExtVec2[FPGA 提取當前特徵向量]
-                        ExtVec2 --> Compare[比對儲存的特徵向量 <br> 計算餘弦相似度]
-                        Compare --> ShowRes[顯示比對結果]
-                        ShowRes --> BackLoop
-                        
-                        BackLoop --> Capture
-                    </pre>
-                </div>
-            </div>
-
-            <div class="section-divider"></div>
-
-            <!-- 區塊 6：模型比較 -->
-            <div class="proj-section">
-                <h3 class="block-title">Why 128-Dim Feature Model?</h3>
-                <div class="table-responsive">
-                    <table class="data-table">
-                        <tr><th>Model</th><th>Inference Time</th><th>Accuracy</th><th>Precision</th><th>AUC</th><th>Selected</th></tr>
-                        <tr><td>MobileFaceNet-512</td><td>81.38s</td><td>81.65%</td><td>88.96%</td><td>0.8826</td><td>—</td></tr>
-                        <tr><td>MobileFaceNet-256</td><td>25.05s</td><td>78.43%</td><td>85.96%</td><td>0.8580</td><td>—</td></tr>
-                        <tr class="selected"><td>MobileFaceNet-128</td><td>19.37s</td><td>78.97%</td><td>84.05%</td><td>0.8580</td><td>✓</td></tr>
-                    </table>
-                </div>
-                <div class="terminal-card">
-                    <div class="terminal-header">Inference Time Comparison</div>
-                    <div class="chart-row"><div class="chart-label">512-dim</div><div class="chart-bar-bg"><div class="chart-bar-fill" style="width: 100%;"></div></div><div class="chart-value">81.38s</div></div>
-                    <div class="chart-row"><div class="chart-label">256-dim</div><div class="chart-bar-bg"><div class="chart-bar-fill" style="width: 30.7%;"></div></div><div class="chart-value">25.05s</div></div>
-                    <div class="chart-row"><div class="chart-label" style="color:var(--accent-cyan)">128-dim</div><div class="chart-bar-bg"><div class="chart-bar-fill selected" style="width: 23.8%;"></div></div><div class="chart-value" style="color:var(--accent-cyan)">19.37s</div></div>
-                </div>
-            </div>
-
-            <!-- 區塊 7：HLS 優化成果 -->
-            <div class="proj-section two-col">
-                <div class="col-50">
-                    <h3 class="block-title" style="border:none; margin-bottom: 10px;">HLS Optimization Strategy</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 20px;">Two key techniques applied to compute layers:</p>
-                    <h4 style="color: var(--text-main); font-family: var(--font-mono);">① Loop Pipelining</h4>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; border-left: 2px solid var(--accent-blue); padding-left: 10px;">Interleaves different loop iterations within a single clock cycle.<br><span style="color: var(--accent-cyan);">→ Achieved Initiation Interval (II) = 1</span></p>
-                    <h4 style="color: var(--text-main); font-family: var(--font-mono);">② Array Partitioning</h4>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; border-left: 2px solid var(--accent-blue); padding-left: 10px;">Splits arrays into independently accessible blocks, reducing memory access congestion.</p>
-                </div>
-                <div class="col-50">
-                    <div class="terminal-card">
-                        <div class="terminal-header" style="text-align: center;">Optimization Results</div>
-                        <div class="terminal-line"><span class="term-label">Before:</span> <span class="term-bar" style="color: var(--text-muted)">████████████</span> 20.62s</div>
-                        <div class="terminal-line"><span class="term-label">After:</span> <span class="term-bar" style="color: var(--accent-cyan)">███████████░</span> 19.37s</div>
-                        <br>
-                        <div style="color: var(--accent-cyan);">✦ Improvement: 6.04%</div>
-                        <div class="terminal-header" style="margin-top:10px;">Hardware Resource Usage</div>
-                        <div class="terminal-line"><span class="term-label">LUT:</span> 22.89% → 26.66% <span style="color:var(--text-muted)">(+3.77%)</span></div>
-                        <div class="terminal-line"><span class="term-label">FF:</span> 19.17% → 21.26% <span style="color:var(--text-muted)">(+2.09%)</span></div>
-                        <div class="terminal-line"><span class="term-label">DSP:</span> 16.36% → 25.00% <span style="color:var(--text-muted)">(+8.64%)</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section-divider"></div>
-
-            <!-- 區塊 8 & 9：卡片比較與資源 -->
-            <div class="proj-section">
-                <h3 class="block-title">Face Detector Selection: Haar vs. MTCNN</h3>
-                <div class="compare-grid">
+                <div class="compare-grid" style="margin-bottom: 20px;">
                     <div class="comp-card success">
-                        <h4 style="color: var(--accent-cyan);">✓ Haar Cascade Classifier</h4>
-                        <ul><li>Fast inference on ARM CPU</li><li>Low computational overhead</li><li>Selected for real-time capture</li></ul>
-                        <div class="trade-off"><strong>Trade-off:</strong> May miss faces at extreme angles.</div>
+                        <h4 style="color: var(--accent-cyan);">
+                            <span class="zh">🏆 模型維度取捨 (Trade-off)</span>
+                            <span class="en">🏆 Model Dimension Trade-off</span>
+                        </h4>
+                        <div class="zh">
+                            <ul>
+                                <li>實作並比較了 512, 256, 128 維特徵輸出的模型。</li>
+                                <li>最終選定 <b>128 維特徵模型</b>，推論僅需 19.37 ms。</li>
+                                <li>相較於 512 維模型，取得 <b>4.2 倍的推論加速</b>，最適合記憶體受限的邊緣裝置。</li>
+                            </ul>
+                        </div>
+                        <div class="en">
+                            <ul>
+                                <li>Evaluated 512, 256, and 128-dim feature models.</li>
+                                <li>Selected <b>128-dim model</b> for its 19.37ms inference.</li>
+                                <li>Achieved a <b>4.2x speedup</b> compared to the 512-dim model, perfect for memory-constrained edge devices.</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="comp-card fail">
-                        <h4 style="color: #F85149;">✗ MTCNN</h4>
-                        <ul><li>Higher recall & precision</li><li>Precision: 0.9182</li><li>Recall: 0.8656</li></ul>
-                        <div class="trade-off"><strong>Trade-off:</strong> Latency too high for embedded real-time.</div>
+                    <div class="comp-card" style="border-top: 3px solid var(--accent-blue);">
+                        <h4 style="color: var(--accent-blue);">
+                            <span class="zh">🧠 記憶體分配與底層傳輸</span>
+                            <span class="en">🧠 Memory & Low-level Transfer</span>
+                        </h4>
+                        <div class="zh">
+                            <ul>
+                                <li>解決巨量 AI 參數在軟體與硬體間的傳輸延遲。</li>
+                                <li>透過 <code>allocate</code> 分配實體連續記憶體。</li>
+                                <li>利用 <b>AXI Master</b> 讓 FPGA 直接存取 DRAM，確保巨量權重與特徵圖的無縫高速傳輸。</li>
+                            </ul>
+                        </div>
+                        <div class="en">
+                            <ul>
+                                <li>Resolved transfer latency of massive AI parameters between SW and HW.</li>
+                                <li>Used <code>allocate</code> for physically contiguous memory.</li>
+                                <li>Enabled direct DRAM access via <b>AXI Master</b>, ensuring seamless high-speed transfer for weights and feature maps.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="terminal-card">
+                    <div class="terminal-header" style="color:var(--accent-cyan)">
+                        <span class="zh">⚡ Vitis HLS 硬體加速與優化</span>
+                        <span class="en">⚡ Vitis HLS Hardware Acceleration</span>
+                    </div>
+                    <div class="zh">
+                        <p style="margin-bottom: 15px;">
+                            我們導入關鍵的 HLS 優化指令以解決效能瓶頸：<br>
+                            <b>1. 循環管線化 (Pipeline)</b>: 使用 <code>#pragma HLS PIPELINE II=1</code> 達成單一週期啟動，使迴圈運算高度並行化。<br>
+                            <b>2. 陣列分割 (Array Partition)</b>: 將陣列分割至多個 Memory Bank，增加硬體存取埠 (Ports)，解決存取延遲。
+                        </p>
+                    </div>
+                    <div class="en">
+                        <p style="margin-bottom: 15px;">
+                            We introduced critical HLS pragmas to solve performance bottlenecks:<br>
+                            <b>1. Loop Pipelining</b>: Used <code>#pragma HLS PIPELINE II=1</code> for single-cycle initiation, highly parallelizing loop computations.<br>
+                            <b>2. Array Partitioning</b>: Split arrays across multiple Memory Banks, increasing hardware ports to resolve access latency.
+                        </p>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart-axis-label">18 ms</div>
+
+                        <div class="chart-row">
+                            <div class="chart-label">Before Opt.</div>
+                            <div class="chart-bar-bg"><div class="chart-bar-fill" style="width: 87.3%;"></div></div>
+                            <div class="chart-value">20.62ms</div>
+                        </div>
+
+                        <div class="chart-row" style="margin-bottom: 0;">
+                            <div class="chart-label" style="color:var(--accent-cyan)">After Opt.</div>
+                            <div class="chart-bar-bg"><div class="chart-bar-fill selected" style="width: 45.6%;"></div></div>
+                            <div class="chart-value" style="color:var(--accent-cyan); font-weight:bold;">19.37ms</div>
+                        </div>
+
+                        <div class="latency-badge">⚡ - 6.04% Latency</div>
                     </div>
                 </div>
             </div>
 
-            <div class="proj-section" style="text-align: center; margin-top: 40px;">
-                <a href="fpga-report.pdf" target="_blank" class="resume-btn" style="border-color: var(--accent-cyan); color: var(--accent-cyan); margin: 0 10px;">📄 View Full Report (PDF)</a>
-                <a href="#" target="_blank" class="resume-btn" style="margin: 0 10px;">💻 GitHub Repository</a>
+            <div class="section-divider"></div>
+
+            <div class="proj-section" style="text-align: center;">
+                <h3 class="block-title" style="border:none; text-align: left;">
+                    <span class="zh">系統成果展示</span>
+                    <span class="en">Results & Demonstration</span>
+                </h3>
+
+                <div class="img-box" style="max-width: 600px; margin: 0 auto 30px;">
+                    <img src="board.png" alt="PYNQ-Z1 Board Setup" style="width: 100%; height: auto; border-radius: 4px; display: block;">
+
+                    <div class="img-caption">
+                        <span class="zh">系統實機運作畫面</span>
+                        <span class="en">System Live Operation</span>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 40px;">
+                    <a href="https://youtu.be/vtx2Kh3cKcM" target="_blank" class="resume-btn primary" style="margin-right: 15px;">
+                        <span class="zh">▶️ 觀看完整實機 Demo 影片</span>
+                        <span class="en">▶️ Watch Full Live Demo Video</span>
+                    </a>
+                    <button class="resume-btn" onclick="document.getElementById('flowchartModal').classList.add('active');">
+                        <span class="zh">🔍 查看完整系統控制流程與狀態機</span>
+                        <span class="en">🔍 View System Control Flowchart</span>
+                    </button>
+                </div>
+
+                <div class="terminal-card" style="text-align: left; max-width: 800px; margin: 0 auto;">
+                    <h4 style="color:var(--accent-blue); margin-bottom: 15px; font-size: 1.1rem;">
+                        <span class="zh">操作流程與極端情境驗證</span>
+                        <span class="en">Workflow & Edge Cases Testing</span>
+                    </h4>
+                    <span class="zh">
+                        <ul style="padding-left: 20px; margin-bottom: 20px; line-height: 1.8;">
+                            <li><b>一鍵捕捉 (Button 0)</b>：啟動 USB 攝影機並自動偵測人臉位置。</li>
+                            <li><b>離線註冊 (Button 1)</b>：硬體加速提取 128 維特徵向量，並安全儲存於本地端 (SD Card)。</li>
+                            <li><b>即時解鎖 (Button 2)</b>：拍攝新影像迅速計算餘弦相似度 (Cosine Similarity)，大於設定閾值即判定解鎖成功。</li>
+                        </ul>
+                        <strong style="color:var(--accent-cyan);">極端情境驗證 (Edge Cases Testing)：</strong><br>
+                        經實際測試，系統在面對極端臉部條件（如露齒笑、閉眼、些微低頭）時，仍維持高度的特徵鑑別度與容錯率，能有效且精準地區分目標身分。
+                    </span>
+                    <span class="en">
+                        <ul style="padding-left: 20px; margin-bottom: 20px; line-height: 1.8;">
+                            <li><b>Capture (Button 0)</b>: Starts the USB camera and automatically detects face position.</li>
+                            <li><b>Offline Register (Button 1)</b>: Hardware-accelerated 128-dim feature extraction, securely saved locally (SD Card).</li>
+                            <li><b>Real-time Unlock (Button 2)</b>: Captures a new image, rapidly computes Cosine Similarity, and unlocks if greater than the threshold.</li>
+                        </ul>
+                        <strong style="color:var(--accent-cyan);">Edge Cases Testing:</strong><br>
+                        Through practical testing, the system maintains high feature discrimination and fault tolerance even under extreme facial conditions (e.g., smiling with teeth, closed eyes, slight head tilt), effectively and accurately distinguishing target identities.
+                    </span>
+                </div>
+            </div>
+
+            <div class="proj-section">
+                <h3 class="block-title">
+                    <span class="zh">自我反思與未來展望</span>
+                    <span class="en">Reflection & Future Works</span>
+                </h3>
+                <div class="compare-grid">
+                    <div class="comp-card">
+                        <h4 style="color: var(--text-main);">
+                            <span class="zh">🔄 Overlay 動態重構優化</span>
+                            <span class="en">🔄 Dynamic Overlay Optimization</span>
+                        </h4>
+                        <div class="zh">
+                            <ul>
+                                <li><b>現存瓶頸：</b>系統需交替載入攝影機控制 (<code>base.bit</code>) 與模型推論 (<code>design_1.bit</code>) 的 Overlay，導致 FPGA 內部邏輯反覆重建，產生切換延遲。</li>
+                                <li><b>解決方案：</b>未來考量將兩者整合成單一設計以消除重構成本；或導入雙 FPGA 架構，將影像擷取與模型推論分流，實現真正的即時並行處理。</li>
+                            </ul>
+                        </div>
+                        <div class="en">
+                            <ul>
+                                <li><b>Current Bottleneck:</b> The system alternates loading camera control (<code>base.bit</code>) and inference (<code>design_1.bit</code>) overlays, causing repeated internal logic reconstruction and switching delays.</li>
+                                <li><b>Solution:</b> Plan to merge both into a single bitstream to eliminate reconfiguration cost, or introduce a dual-FPGA architecture to separate capture and inference for true real-time parallel processing.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="comp-card">
+                        <h4 style="color: var(--text-main);">
+                            <span class="zh">📈 ASIC 設計流程轉換</span>
+                            <span class="en">📈 ASIC Flow Migration</span>
+                        </h4>
+                        <div class="zh">
+                            <ul>
+                                <li><b>現存瓶頸：</b>目前採用 FPGA Design Style，雖具備快速原型開發優勢，但通用邏輯資源在執行專用運算時，時脈與資源利用率易受限。</li>
+                                <li><b>解決方案：</b>若面向大規模量產或追求更低延遲，計畫轉向 <b>Standard Design Style (標準單元設計)</b>，採用經優化的標準邏輯單元建構專用電路，藉此提升佈局密度與時脈效能。</li>
+                            </ul>
+                        </div>
+                        <div class="en">
+                            <ul>
+                                <li><b>Current Bottleneck:</b> Currently utilizing FPGA Design Style. While advantageous for rapid prototyping, general logic resources often limit clock speed and resource utilization when executing dedicated computations.</li>
+                                <li><b>Solution:</b> For mass production or achieving lower latency, plan to migrate to <b>Standard Design Style</b>. Building dedicated circuits with optimized standard cells will enhance routing density and clock performance.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="proj-section" style="text-align: center; margin-top: 20px;">
+                <a href="https://github.com/zhixain/FPGA-Project" target="_blank" class="resume-btn" style="border-color: var(--accent-cyan); color: var(--accent-cyan); margin: 0 10px;">
+                    <span class="zh">💻 GitHub 原始碼</span>
+                    <span class="en">💻 GitHub Repository</span>
+                </a>
+                <a href="fpga-report.pdf" target="_blank" class="resume-btn" style="margin: 0 10px;">
+                    <span class="zh">📄 查看完整專題報告 (PDF)</span>
+                    <span class="en">📄 View Full Report (PDF)</span>
+                </a>
             </div>
         </section>
 
-        <!-- 聯絡方式 -->
         <section id="contact" class="proj-section" style="text-align: center; margin-top: 40px; padding-bottom: 80px;">
             <div class="section-divider"></div>
-            <h2 class="block-title" style="border:none; justify-content:center;">Let's Connect</h2>
+            <h2 class="block-title" style="border:none; justify-content:center;">Connect me</h2>
             <div style="font-family: var(--font-mono); font-size: 1.1rem; line-height: 2;">
                 📧 <a href="mailto:s0715368@gmail.com">s0715368@gmail.com</a><br>
                 📱 +886 0979-106-560<br>
@@ -420,14 +847,21 @@
         </section>
     </div>
 
-    <!-- 控制 Lightbox 圖片放大的 JS -->
     <script>
-        function openZoom(imgSrc) {
-            document.getElementById('zoomImg').src = imgSrc;
-            document.getElementById('zoomOverlay').classList.add('active');
+        // 1. 雙語切換控制
+        let isEnglish = false;
+        function toggleLanguage() {
+        isEnglish = !isEnglish;
+        if (isEnglish) {
+        document.body.classList.add('lang-en');
+        } else {
+        document.body.classList.remove('lang-en');
         }
-        function closeZoom() {
-            document.getElementById('zoomOverlay').classList.remove('active');
+        }
+
+        // 2. 關閉系統控制流程 Modal
+        function closeFlowchart() {
+        document.getElementById('flowchartModal').classList.remove('active');
         }
     </script>
 </body>
