@@ -548,8 +548,10 @@
                     國立東華大學 資訊工程學系 輔系電機工程學系<br>
                     <span style="font-size: 0.9em; color: var(--text-muted);">預計 2026 年 6 月畢業</span>
                 </span>
+
                 <span class="en">
-                    National Dong Hwa University | B.S. in Computer Science, Minor in Electrical Engineering<br>
+                    National Dong Hwa University<br>
+                    B.S. in Computer Science, Minor in Electrical Engineering<br>
                     <span style="font-size: 0.9em; color: var(--text-muted);">Class of 2026</span>
                 </span>
             </div>
@@ -593,38 +595,39 @@
             <div class="proj-section">
                 <div class="terminal-card" style="margin-bottom: 30px;">
                     <strong style="color: var(--accent-cyan); font-size: 1.1rem;">
-                        <span class="zh">🚀 簡介 (Elevator Pitch)</span>
-                        <span class="en">🚀 Elevator Pitch</span>
+                        <span class="zh">🚀 專題簡介</span>
+                        <span class="en">🚀 Project Overview</span>
                     </strong><br><br>
-                    <span class="zh"><b>打造一套無需網路、保護隱私，且能在低成本硬體上即時運作的 AI 人臉辨識系統。</b><br>我們結合深度學習與 FPGA 軟硬體整合技術，讓門禁可直接於本地端運算。</span>
-                    <span class="en"><b>Building an AI facial recognition system that requires no network, protects privacy, and operates in real-time on low-cost hardware.</b><br>By integrating deep learning with FPGA HW/SW co-design, we enable access control to be processed entirely on the local edge device.</span>
+                    <span class="zh">結合深度學習與 FPGA 軟硬體整合技術，建立一套無需網路、保護隱私，且能在低成本硬體上即時運作的 AI 人臉辨識系統，讓門禁可直接於本地端運算。</span>
+                    <span class="en">Combining deep learning with FPGA HW/SW integration, we built a network-free, privacy-preserving AI facial recognition system that operates in real-time on low-cost hardware, enabling access control to be processed directly on the local edge.</span>
                 </div>
 
                 <div class="two-col">
                     <div class="col-50 code-block">
                         <span style="color:var(--accent-blue); font-size: 1.2rem; font-weight: bold;">
-                            <span class="zh">開發背景</span>
-                            <span class="en">Background</span>
+                            <span class="zh">📌 開發背景</span>
+                            <span class="en">📌 Background</span>
                         </span><br><br>
                         <span class="zh">
-                            <b>隱私與網路限制：</b>高度依賴雲端運算，存在資料外洩風險，且無網路即停擺。<br><br>
-                            <b>邊緣設備算力不足：</b>若將 AI 模型直接放到一般平價的嵌入式設備上跑，往往會遭遇嚴重的畫面卡頓與高延遲。
+                            <b>• 隱私與網路限制：</b>高度依賴雲端運算，存在資料外洩風險，且無網路即停擺。<br><br>
+                            <b>• 邊緣設備算力不足：</b>若將 AI 模型直接放到一般平價的嵌入式設備上跑，往往會遭遇嚴重的畫面卡頓與高延遲。
                         </span>
                         <span class="en">
-                            <b>Privacy & Network Limits:</b> High dependence on cloud computing poses data leak risks and fails without a network.<br><br>
-                            <b>Insufficient Edge Compute:</b> Deploying AI models directly on standard budget embedded devices often leads to severe frame drops and high latency.
+                            <b>• Privacy & Network Limits:</b> High dependence on cloud computing poses data leak risks and fails without a network.<br><br>
+                            <b>• Insufficient Edge Compute:</b> Deploying AI models directly on standard budget embedded devices often leads to severe frame drops and high latency.
                         </span>
                     </div>
                     <div class="col-50 code-block" style="border-color: var(--accent-cyan);">
                         <span style="color:var(--accent-cyan); font-size: 1.2rem; font-weight: bold;">
-                            <span class="zh">我們的解決方案</span>
-                            <span class="en">Our Solution</span>
+                            <span class="zh">💡 解決方法</span>
+                            <span class="en">💡 Our Solution</span>
                         </span><br><br>
                         <span class="zh">
                             我們以 PYNQ-Z1 (FPGA) 作為邊緣加速平台，透過軟硬體協同設計 (HW/SW Co-design) 突破設備算力瓶頸：<br>
-                            <b>• AI 模型硬體化：</b>將複雜的 CNN 神經網路直接轉換為「實體硬體電路」執行，取代傳統軟體運算，大幅加速推論過程。<br>
-                            <b>• ARM 與 PL 高效分工：</b>結合 ARM 處理器與可程式邏輯 (PL)，精準分配控制邏輯與平行運算任務，打造完全脫離雲端的本地端架構。<br>
-                            <b>• 兼顧隱私與即時效能：</b>不僅實現資料完全在本地端 (Local) 處理以保障隱私，更在低成本硬體上成功實現 30 FPS 的即時辨識速度。
+                        
+                        <b>• AI 模型硬體化：</b>將複雜的 CNN 神經網路直接轉換為「實體硬體電路」執行，取代傳統軟體運算，大幅加速推論過程。<br>
+                        <b>• ARM 與 PL 高效分工：</b>結合 ARM 處理器與可程式邏輯 (PL)，精準分配控制邏輯與平行運算任務，打造完全脫離雲端的本地端架構。<br>
+                        <b>• 兼顧隱私與即時效能：</b>不僅實現資料完全在本地端 (Local) 處理以保障隱私，更在低成本硬體上成功實現 30 FPS 的即時辨識速度。
                         </span>
                         <span class="en">
                             We use PYNQ-Z1 (FPGA) as an edge acceleration platform, breaking compute bottlenecks via HW/SW co-design:<br>
@@ -638,14 +641,14 @@
 
             <div class="proj-section">
                 <h3 class="block-title">
-                    <span class="zh">技術挑戰與效能優化</span>
-                    <span class="en">Technical Challenges & Optimization</span>
+                    <span class="zh">🚀技術挑戰與效能優化</span>
+                    <span class="en">🚀Technical Challenges & Optimization</span>
                 </h3>
 
                 <div class="compare-grid" style="margin-bottom: 20px;">
                     <div class="comp-card success">
                         <h4 style="color: var(--accent-cyan);">
-                            <span class="zh">🏆 模型維度取捨 (Trade-off)</span>
+                            <span class="zh">🏆 模型維度取捨</span>
                             <span class="en">🏆 Model Dimension Trade-off</span>
                         </h4>
                         <div class="zh">
@@ -729,8 +732,8 @@
 
             <div class="proj-section" style="text-align: center;">
                 <h3 class="block-title" style="border:none; text-align: left;">
-                    <span class="zh">系統成果展示</span>
-                    <span class="en">Results & Demonstration</span>
+                    <span class="zh">🚀系統成果展示</span>
+                    <span class="en">🚀Results & Demonstration</span>
                 </h3>
 
                 <div class="img-box" style="max-width: 600px; margin: 0 auto 30px;">
@@ -755,8 +758,8 @@
 
                 <div class="terminal-card" style="text-align: left; max-width: 800px; margin: 0 auto;">
                     <h4 style="color:var(--accent-blue); margin-bottom: 15px; font-size: 1.1rem;">
-                        <span class="zh">操作流程與極端情境驗證</span>
-                        <span class="en">Workflow & Edge Cases Testing</span>
+                        <span class="zh">✏️操作流程與極端情境驗證</span>
+                        <span class="en">✏️Workflow & Edge Cases Testing</span>
                     </h4>
                     <span class="zh">
                         <ul style="padding-left: 20px; margin-bottom: 20px; line-height: 1.8;">
@@ -764,7 +767,7 @@
                             <li><b>離線註冊 (Button 1)</b>：硬體加速提取 128 維特徵向量，並安全儲存於本地端 (SD Card)。</li>
                             <li><b>即時解鎖 (Button 2)</b>：拍攝新影像迅速計算餘弦相似度 (Cosine Similarity)，大於設定閾值即判定解鎖成功。</li>
                         </ul>
-                        <strong style="color:var(--accent-cyan);">極端情境驗證 (Edge Cases Testing)：</strong><br>
+                        <strong style="color:var(--accent-cyan);">📍極端情境驗證：</strong><br>
                         經實際測試，系統在面對極端臉部條件（如露齒笑、閉眼、些微低頭）時，仍維持高度的特徵鑑別度與容錯率，能有效且精準地區分目標身分。
                     </span>
                     <span class="en">
@@ -773,7 +776,7 @@
                             <li><b>Offline Register (Button 1)</b>: Hardware-accelerated 128-dim feature extraction, securely saved locally (SD Card).</li>
                             <li><b>Real-time Unlock (Button 2)</b>: Captures a new image, rapidly computes Cosine Similarity, and unlocks if greater than the threshold.</li>
                         </ul>
-                        <strong style="color:var(--accent-cyan);">Edge Cases Testing:</strong><br>
+                        <strong style="color:var(--accent-cyan);">📍Edge Cases Testing:</strong><br>
                         Through practical testing, the system maintains high feature discrimination and fault tolerance even under extreme facial conditions (e.g., smiling with teeth, closed eyes, slight head tilt), effectively and accurately distinguishing target identities.
                     </span>
                 </div>
@@ -781,8 +784,8 @@
 
             <div class="proj-section">
                 <h3 class="block-title">
-                    <span class="zh">自我反思與未來展望</span>
-                    <span class="en">Reflection & Future Works</span>
+                    <span class="zh">🚀自我反思與未來展望</span>
+                    <span class="en">🚀Reflection & Future Works</span>
                 </h3>
                 <div class="compare-grid">
                     <div class="comp-card">
